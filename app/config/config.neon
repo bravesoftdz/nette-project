@@ -1,0 +1,39 @@
+parameters:
+
+
+application:
+	errorPresenter: Error
+	scanDirs: no
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+session:
+	expiration: 14 days
+
+database:
+	dsn: 'mysql:host=dykyi-mysql;dbname=mydb'
+	user: root
+	password: root
+
+doctrine:
+    host: dykyi-mysql
+    user: root
+    password: root
+    dbname: mydb
+    metadata:
+        App: %appDir%
+
+services:
+    - App\Article()
+    router: App\RouterFactory::createRouter
+
+extensions:
+ 	- App\Services\PublicationService\DI\PublicationServiceExtension
+ 	events: Kdyby\Events\DI\EventsExtension
+ 	monolog: Kdyby\Monolog\DI\MonologExtension
+ 	console: Kdyby\Console\DI\ConsoleExtension
+ 	annotations: Kdyby\Annotations\DI\AnnotationsExtension
+ 	doctrine: Kdyby\Doctrine\DI\OrmExtension
+
+monolog:
+	name: book-example
