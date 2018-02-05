@@ -20,7 +20,7 @@
                     <tbody>
                     {foreach $articles as $article}
                         <tr>
-                            <th scope="row">1</th>
+                            <th scope="row">{$article->getId()}</th>
                             <td>{$article->getTitle()}</td>
                             <td>
                                 {$article->getAuthor()->getName()}
