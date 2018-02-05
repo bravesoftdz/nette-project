@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\PublicationService\ValueObject\AuthorId;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity
  */
-class Author
+class Author implements ModelInterface
 {
     use \Kdyby\Doctrine\Entities\Attributes\UniversallyUniqueIdentifier;
 

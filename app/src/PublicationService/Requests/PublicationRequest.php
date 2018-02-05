@@ -11,21 +11,18 @@ abstract class PublicationRequest implements PublicationRequestInterface
     private $title;
     private $authors;
     private $pages;
-    private $amount;
 
     /**
      * PublicationRequest constructor.
      * @param $title
      * @param $authors
      * @param $page
-     * @param $amount
      */
-    public function __construct($title, $authors, $page, $amount)
+    public function __construct($title, $authors, $page)
     {
         $this->title   = $title;
         $this->authors = $authors;
         $this->pages   = (int)$page;
-        $this->amount  = (int)$amount;
     }
 
     public function title()
@@ -41,11 +38,6 @@ abstract class PublicationRequest implements PublicationRequestInterface
     public function pages()
     {
         return $this->pages;
-    }
-
-    public function amount()
-    {
-        return $this->amount;
     }
 
     public function type()

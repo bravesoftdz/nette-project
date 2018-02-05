@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity
  */
-class Article
+class Article implements ModelInterface
 {
     use \Kdyby\Doctrine\Entities\Attributes\UniversallyUniqueIdentifier;
 
@@ -30,6 +30,21 @@ class Article
      * @ORM\Column(type="integer")
      */
     protected $pages;
+
+    /**
+     * @param $title
+     * @param Author $authors
+     * @param $page
+     * @return $this
+     */
+    public function create($title, Author $authors, $page)
+    {
+        $this->title   = $title;
+        $this->author  = $authors;
+        $this->pages   = (int)$page;
+
+        return $this;
+    }
 
     /**
      * Set title

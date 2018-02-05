@@ -2,7 +2,7 @@
 
 namespace App\Services\PublicationService\Repository;
 
-use App\Article;
+use App\ModelInterface;
 use App\Services\PublicationService\ValueObject\ArticleId;
 use Ramsey\Uuid\Uuid;
 
@@ -18,13 +18,19 @@ class DoctrineArticleRepository extends EntityRepository implements ArticleRepos
         return ArticleId::create(strtoupper(Uuid::uuid4()));
     }
 
-    public function add(Article $article)
+    public function add(ModelInterface $article)
     {
         $this->getEntityManager()->persist($article);
     }
 
-    public function remove(Article $article)
+    public function remove(ModelInterface $article)
     {
         $this->getEntityManager()->remove($article);
     }
+
+    public function save()
+    {
+        $this->getEntityManager()->flush();
+    }
+
 }

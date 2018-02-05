@@ -20,9 +20,7 @@ class Book
 
     /**
      * @ORM\ManyToOne(targetEntity="Author", inversedBy="books")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="SET NULL")
-     *
-     * @ORM\Column(type="string")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     protected $author;
 

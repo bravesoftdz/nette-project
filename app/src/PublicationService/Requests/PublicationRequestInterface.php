@@ -14,7 +14,5 @@ interface PublicationRequestInterface
 
     public function pages();
 
-    public function amount();
-
     public function type();
 }

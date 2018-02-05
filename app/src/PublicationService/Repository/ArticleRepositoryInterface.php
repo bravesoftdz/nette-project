@@ -2,7 +2,7 @@
 
 namespace App\Services\PublicationService\Repository;
 
-use App\Article;
+use App\ModelInterface;
 
 /**
  * Interface ArticleRepositoryInterface
@@ -12,7 +12,7 @@ interface ArticleRepositoryInterface
 {
     public function nextIdentity();
 
-    public function add(Article $anOrder);
+    public function add(ModelInterface $anOrder);
 
-    public function remove(Article $anOrder);
+    public function remove(ModelInterface $anOrder);
 }

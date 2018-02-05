@@ -2,29 +2,35 @@
 
 namespace App\Services\PublicationService\Repository;
 
-use App\Author;
-use App\Services\PublicationService\ValueObject\ArticleId;
+use App\ModelInterface;
+use App\Services\PublicationService\ValueObject\AuthorId;
 use Ramsey\Uuid\Uuid;
 
 /**
  * Class DoctrineAuthorRepository
  * @package App\Services\PublicationService\Repository
  */
-class DoctrineAuthorRepository extends EntityRepository implements AuthorRepositoryInterface
+class DoctrineAuthorRepository extends EntityRepository implements ArticleRepositoryInterface
 {
 
     public function nextIdentity()
     {
-        return ArticleId::create(strtoupper(Uuid::uuid4()));
+        return AuthorId::create(strtoupper(Uuid::uuid4()));
     }
 
-    public function add(Author $author)
+    public function add(ModelInterface $article)
     {
-        $this->getEntityManager()->persist($author);
+        $this->getEntityManager()->persist($article);
     }
 
-    public function remove(Author $author)
+    public function remove(ModelInterface $article)
     {
-        $this->getEntityManager()->remove($author);
+        $this->getEntityManager()->remove($article);
     }
+
+    public function save()
+    {
+        $this->getEntityManager()->flush();
+    }
+
 }

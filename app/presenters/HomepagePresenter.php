@@ -3,10 +3,7 @@
 namespace App\Presenters;
 
 use App\Article;
-use App\Author;
-use App\Services\PublicationService\Exceptions\PublicationAlreadyExist;
-use App\Services\PublicationService\PublicationService;
-use App\Services\PublicationService\Requests\BookRequest;
+use App\Book;
 use Kdyby\Doctrine\EntityManager;
 use Nette;
 
@@ -16,22 +13,19 @@ use Nette;
  */
 class HomepagePresenter extends Nette\Application\UI\Presenter
 {
-    private $publicationService;
+    private $entityManager;
 
-    public function __construct(PublicationService $publicationService, EntityManager $entityManager)
+    public function __construct(EntityManager $entityManager)
     {
+        $this->entityManager = $entityManager;
+    }
 
-        $articles = $entityManager->getRepository(Article::class);
+    public function renderDefault()
+    {
+        $books    = $this->entityManager->getRepository(Book::class);
+        $articles = $this->entityManager->getRepository(Article::class);
 
-        $article = $articles->find(1);
-        echo $article->getTitle();
-
-        $this->publicationService = $publicationService;
-        $request = new BookRequest(1,1,1,1);
-        try {
-            $this->publicationService->execute($request);
-        } catch (PublicationAlreadyExist $e){
-            // render to error or show error message
-        }
+        $this->template->books = $books->findAll();
+        $this->template->articles = $articles->findAll();
     }
 }
